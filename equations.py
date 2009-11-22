@@ -17,6 +17,8 @@ n = Symbol('nu', real = False)
 m = Symbol('mu', real = False)
 l = Symbol('lambda', real = False)
 
+# perhaps this could be a dictionary
+# np_scalars = {'k': k, 't': t, ...}
 np_scalars = (k, t, s, r, e, g, b, a, p, n, m, l)
 
 # Ricci scalar
@@ -36,6 +38,7 @@ p20 = conjugate(p02, real = False)
 p21 = conjugate(p12, real = False)
 p22 = Symbol('Phi22', real=True)
 
+# perhaps a dictionary...?
 trace_free_ricci = (p00, p01, p02, p10, p11, p12, p20, p21, p22)
 
 # Weyl tensor components
@@ -45,6 +48,7 @@ psi2 = Symbol('Psi2', real = False)
 psi3 = Symbol('Psi3', real = False)
 psi4 = Symbol('Psi4', real = False)
 
+# perhaps a dictionary...?
 weyl_scalars = (psi0, psi1, psi2, psi3, psi4)
 
 # spin coefficient equations
@@ -101,7 +105,8 @@ e17 = Delta(r) - deltab(t) - (g + conjugate(g) - conjugate(m))*r + s*l \
 
 e18 = Delta(a) - deltab(g) - (r + e)*n + (t + b)*l - (conjugate(g) - conjugate(m))*a \
       - (conjugate(b) - conjugate(t))*g + psi3
-      
+
+# perhaps a dictionary...?
 field_equations = (e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12,
                    e13, e14, e15, e16, e17, e18)
 
@@ -143,6 +148,7 @@ b11 = 1
 
 b12 = 1
 
+# perhaps a dictionary...?
 bianchi_identities = (b01, b02, b03, b04, b05, b06, b07, b08, b09)
 
 # commutator equations (operators)
