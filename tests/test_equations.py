@@ -6,7 +6,7 @@ class TestScalars(unittest.TestCase):
 
     def test_complex_scalars(self):
         for scalar in np_scalars:
-            self.assertEqual(k.is_real, False)
+            self.assertEqual(scalar.is_real, False)
 
     def test_L(self):
         self.assertEqual(L, conjugate(L))

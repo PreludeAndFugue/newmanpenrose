@@ -63,45 +63,70 @@ e04 = D(a) - deltab(e) - (r + conjugate(e) - 2*e)*a - b*conjugate(s) \
 e05 = D(b) - delta(e) - (a + p)*s - (conjugate(r) - conjugate(e))*b + (m + g)*k \
       + (conjugate(a) - conjugate(p))*e - psi1
 
-e06 = 1
+e06 = D(g) - Delta(e) - (t + conjugate(p))*a - (conjugate(t) + p)*b \
+      + (e + conjugate(e))*g + (g + conjugate(g))*e - t*p + n*k - psi2 + L - p11
 
-e07 = 1
+e07 = D(l) - deltab(p) - (r - 3*e + conjugate(e))*l - conjugate(s)*m \
+      - (p + a - conjugate(b))*p + n*conjugate(k) - p20
 
-e08 = 1
+e08 = D(m) - delta(p) - (conjugate(r) - e - conjugate(e))*m - s*l \
+      - (conjugate(p) - conjugate(a) + b)*p + n*k - psi2 - 2*L
 
-e09 = 1
+e09 = D(n) - Delta(p) - (p + conjugate(t))*m - (conjugate(p) + t)*l \
+      - (g - conjugate(g))*p + (3*e + conjugate(e))*n - psi3 - p21
 
-e10 = 1
+e10 = Delta(l) - deltab(n) + (m + conjugate(m) + 3*g - conjugate(g))*l \
+      - (3*a + conjugate(b) + p - conjugate(t))*n + psi4
 
-e11 = 1
+e11 = delta(r) - deltab(s) - (conjugate(a) + b)*r + (3*a - conjugate(b))*s \
+      - (r - conjugate(r))*t - (m - conjugate(m))*k + psi1 - p01
 
-e12 = 1
+e12 = delta(a) - deltab(b) - m*r + l*s - a*conjugate(a) - b*conjugate(b) + 2*a*b \
+      - (r - conjugate(r))*g - (m - conjugate(m))*e + psi2 - L - p11
 
-e13 = 1
+e13 = delta(l) - deltab(m) - (r - conjugate(r))*n - (m - conjugate(m))*p \
+      - (a + conjugate(b))*m - (conjugate(a) - 3*b)*l + psi3 - p21
 
-e14 = 1
+e14 = Delta(m) - delta(n) + (m + g + conjugate(g))*m + l*conjugate(l) \
+      - conjugate(n)*p - (conjugate(a) + 3*b - t)*n + p22
 
-e15 = 1
+e15 = Delta(b) - delta(g) - (conjugate(a) + b - t)*g + m*t - s*n + e*conjugate(n) \
+      - (g - conjugate(g) - m)*b + a*conjugate(l) + p12
 
-e16 = 1
+e16 = Delta(s) - delta(t) + (m - 3*g + conjugate(g))*s + conjugate(l)*r \
+      + (t + b - conjugate(a))*t - k*conjugate(n) + p02
 
-e17 = 1
+e17 = Delta(r) - deltab(t) - (g + conjugate(g) - conjugate(m))*r + s*l \
+      - (conjugate(b) - a -conjugate(t))*t - n*k + psi2 + 2*L
 
-e18 = 1
+e18 = Delta(a) - deltab(g) - (r + e)*n + (t + b)*l - (conjugate(g) - conjugate(m))*a \
+      - (conjugate(b) - conjugate(t))*g + psi3
       
 field_equations = (e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12,
                    e13, e14, e15, e16, e17, e18)
 
 # Bianchi identities
-b01 = 1
+b01 = D(psi1) - deltab(psi0) - D(p01) + delta(p00) - (p - 4*a)*psi0 \
+      - 2*(2*r + e)*psi1 + 3*k*psi2 + (conjugate(k) - 2*conjugate(a) - 2*b)*p00 \
+      + 2*(conjugate(r) + e)*p01 + 2*s*p10 - 2*k*p11 - conjugate(k)*p02
 
-b02 = 1
+b02 = Delta(psi0) - delta(psi1) + D(p02) - delta(p01) - (4*g - m)*psi0 \
+      + 2*(2*t + b)*psi1 - 3*s*psi2 + conjugate(l)*p00 - 2*(conjugate(p) - b)*p01 \
+      - 2*s*p11 - (conjugate(r) + 2*e - 2*conjugate(e))*p02 + 2*k*p12
 
-b03 = 1
+b03 = D(psi2) - deltab(psi1) + Delta(p00) - deltab(p01) + 2*D(L) + l*psi0 \
+      - 2*(p - a)*psi1 - 3*r*psi2 - (2*g + 2*conjugate(g) - conjugate(m))*p00 \
+      + 2*(a + conjugate(t))*p01 + 2*t*p10 - 2*r*p11 - conjugate(s)*p02
 
-b04 = 1
+b04 = Delta(psi1) - delta(psi2) - Delta(p01) + deltab(p02) - 2*delta(L) - n*psi0 \
+      - 2*(g - m)*psi1 + 3*t*psi2 - 2*s*psi3 + conjugate(n)*p22 \
+      - 2*(conjugate(m) - g)*p01 - (2*a + conjugate(t) - 2*conjugate(b))*p02 \
+      - 2*t*p11 + 2*r*p12
 
-b05 = 1
+b05 = D(psi3) - deltab(psi2) - D(p21) + delta(p20) - 2*deltab(L) + 2*l*psi1 \
+      - 3*p*psi2 - 2*(r - e)*psi3 + k*psi4 - 2*m*p10 + 2*p*p11 \
+      + (2*b + conjugate(p) - 2*conjugate(a))*p20 + 2*(conjugate(r) - e)*p21 \
+      - conjugate(k)*p22
 
 b06 = 1
 
