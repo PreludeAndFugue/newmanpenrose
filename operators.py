@@ -24,7 +24,7 @@ class DerivativeOperator(Function):
             return result
         if arg.is_Pow:
             x, n = arg.as_base_exp()
-            return n*cls(x**(n - 1))
+            return n*x**(n - 1)*cls(x)
         if arg.is_Mul:
             # TODO: this has to be generalised to arbitrary number of args
             x, y = arg.args

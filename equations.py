@@ -29,13 +29,13 @@ p00 = Symbol('Phi00', real = True)
 p01 = Symbol('Phi01', real = False)
 p02 = Symbol('Phi02', real = False)
 # p10 is complex-conjugate of p01
-p10 = conjugate(p01, real = False)
+p10 = conjugate(p01)
 p11 = Symbol('Phi11', real=True)
 p12 = Symbol('Phi12', real = False)
 # p20 is complex-conjugate of p02
-p20 = conjugate(p02, real = False)
+p20 = conjugate(p02)
 # p21 is complex-conjugate of p12
-p21 = conjugate(p12, real = False)
+p21 = conjugate(p12)
 p22 = Symbol('Phi22', real=True)
 
 # perhaps a dictionary...?
