@@ -12,7 +12,7 @@ x = Symbol('x', real = True)
 z = Symbol('z')
 
 class TestOperators(unittest.TestCase):
-    
+
     def test_constants(self):
         """The derivative operators applied to constants should result in
         zero."""
@@ -29,7 +29,7 @@ class TestOperators(unittest.TestCase):
         self.assertEqual(conjugate(deltab(x)), delta(x))
         self.assertEqual(conjugate(delta(z)), deltab(conjugate(z)))
         self.assertEqual(conjugate(deltab(z)), delta(conjugate(z)))
-        
+
     def test_powers(self):
         operands = (x**4, x**n, z**3, z**n, x**(-1), x**(-n), z**(-2), z**(-n))
         for op in operators:
@@ -38,22 +38,22 @@ class TestOperators(unittest.TestCase):
                 self.assertEqual((op(operand) - diff(operand, base)*op(base)).expand(), 0)
                 # same test
                 self.assertEqual((op(operand) - exp*base**(exp - 1)*op(base)).expand(), 0)
-                
+
     def test_addition(self):
         y = x + z
         for op in operators:
             self.assertEqual(op(y), op(x) + op(z))
-            
+
     def test_mult_constant(self):
         for op in operators:
             for operand in (x, z):
                 self.assertEqual(op(4*operand), 4*op(operand))
-                
+                self.assertEqual(op(S.One*operand), S.One*op(operand))
+
     def test_minus(self):
         for op in operators:
             for operand in (x, z):
                 self.assertEqual(op(-operand), -op(operand))
-        
+
 if __name__ == '__main__':
     unittest.main()
-        

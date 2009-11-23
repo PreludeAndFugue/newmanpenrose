@@ -6,7 +6,7 @@ from sympy import Symbol, Function, conjugate, S
 #deltab = Function('deltab')    
 
 class DerivativeOperator(Function):
-    
+
     nargs = 1
 
     @classmethod
@@ -29,39 +29,39 @@ class DerivativeOperator(Function):
             # TODO: this has to be generalised to arbitrary number of args
             x, y = arg.args
             return x*cls(y) + y*cls(x)
-            
-            
+
+
 class D(DerivativeOperator):
-    
+
     def _eval_conjugate(self):
         # for real derivative operator
         return self.func(conjugate(self.args[0]))
-        
-        
+
+
 class Delta(DerivativeOperator):
 
     def _eval_conjugate(self):
         # for real derivative operator
         return self.func(conjugate(self.args[0]))
 
-        
+
 class delta(DerivativeOperator):
-    
+
     def _eval_conjugate(self):
         return deltab(conjugate(self.args[0]))
 
-        
+
 class deltab(DerivativeOperator):
 
     def _eval_conjugate(self):
         return delta(conjugate(self.args[0]))
 
-        
+
 def main(): 
     x = Symbol('x', real = True)
     y = Symbol('y')
     z = Symbol('z')
-    
+
     print conjugate(D(x**2))
     print 'D(5) =', D(5)
     print 'D(-x) = ', D(-x)

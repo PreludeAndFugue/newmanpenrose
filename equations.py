@@ -157,24 +157,30 @@ def com1(scalar):
     return Delta(D(scalar)) - D(Delta(scalar)) - (g + conjugate(g))*D(scalar) \
            - (e + conjugate(e))*Delta(scalar) + (conjugate(t) + p)*delta(scalar) \
            + (t + conjugate(p))*deltab(scalar)
-           
+
 def com2(scalar):
     """The delta-D commutator."""
     return delta(D(scalar)) - D(delta(scalar)) - (conjugate(a) + b - conjugate(p))*D(scalar) \
            - k*Delta(scalar) + (conjugate(r) + e - conjugate(e))*delta(scalar) \
            + s*deltab(scalar)
-           
+
 def com3(scalar):
     """The delta-Delta commutator."""
-    pass
-    
+    return delta(Delta(scalar)) - Delta(delta(scalar)) + conjugate(n)*D(scalar) \
+           - (t - conjugate(a) - b)*Delta(scalar) - (m - g + conjugate(g))*delta(scalar) \
+           - conjugate(l)*deltab(scalar)
+
 def com4(scalar):
     """The delta-deltab commutator."""
-    pass
-    
+    return deltab(delta(scalar)) - delta(deltab(scalar)) - (conjugate(m) - m)*D(scalar) \
+           - (conjugate(r) - r)*Delta(scalar) - (a - conjugate(b))*delta(scalar) \
+           + (conjugate(a) - b)*deltab(scalar)
+
 def commutators(scalar):
     """All the commutators applied to a scalar."""
     return com1(scalar), com2(scalar), com3(scalar), com4(scalar)
+
+comms = (com1, com2, com3, com4)
 
 def main():
     print e01
