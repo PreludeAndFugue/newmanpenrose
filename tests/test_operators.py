@@ -39,21 +39,38 @@ class TestOperators(unittest.TestCase):
                 # same test
                 self.assertEqual((op(operand) - exp*base**(exp - 1)*op(base)).expand(), 0)
 
-    def test_addition(self):
+    def test_sum_rule(self):
         y = x + z
         for op in operators:
             self.assertEqual(op(y), op(x) + op(z))
 
-    def test_mult_constant(self):
+    def test_constant_multiple(self):
         for op in operators:
             for operand in (x, z):
-                self.assertEqual(op(4*operand), 4*op(operand))
-                self.assertEqual(op(S.One*operand), S.One*op(operand))
+                for constant in (0, 1, -5, S.Zero, S.One):
+                    self.assertEqual(op(constant*operand), constant*op(operand))
 
     def test_minus(self):
         for op in operators:
             for operand in (x, z):
                 self.assertEqual(op(-operand), -op(operand))
+                
+    def test_product_rule(self):
+        for op in operators:
+            self.assertEqual(op(x*z) - z*op(x) - x*op(z), 0)
+            
+    def test_general(self):
+        for op in operators:
+            lhs = op(2*x*z)
+            rhs = 2*z*op(x) + 2*x*op(z)
+            self.assertEqual(lhs - rhs, 0)
+            # quotient rule
+            lhs = op(x/z)
+            rhs = op(x)/z - x*op(z)/z**2
+            self.assertEqual(lhs - rhs, 0)
+            lhs = op(5*x**2 + z - 4*z**5*x)
+            rhs = 10*x*op(x) + op(z) - 4*z**5*op(x) - 20*z**4*x*op(z)
+            self.assertEqual(lhs - rhs, 0)
 
 if __name__ == '__main__':
     unittest.main()

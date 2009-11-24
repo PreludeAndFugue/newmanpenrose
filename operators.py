@@ -1,4 +1,4 @@
-from sympy import Symbol, Function, conjugate, S
+from sympy import Symbol, Function, conjugate, S, Mul, Add
 
 #D = Function('D')
 #Delta = Function ('Delta')
@@ -18,17 +18,20 @@ class DerivativeOperator(Function):
         if arg.could_extract_minus_sign():
             return -cls(-arg)
         if arg.is_Add:
-            result = 0
+            parts = []
             for val in arg.args:
-                result += cls(val)
-            return result
+                parts.append(cls(val))
+            return Add(*parts)
         if arg.is_Pow:
+            # assume exponent is a constant
             x, n = arg.as_base_exp()
             return n*x**(n - 1)*cls(x)
         if arg.is_Mul:
-            # TODO: this has to be generalised to arbitrary number of args
-            x, y = arg.args
-            return x*cls(y) + y*cls(x)
+            factors = []
+            for i, val in enumerate(arg.args):
+                parts = arg.args[:i] + arg.args[i + 1:] + (cls(val),)
+                factors.append(Mul(*parts))
+            return Add(*factors)
 
 
 class D(DerivativeOperator):
