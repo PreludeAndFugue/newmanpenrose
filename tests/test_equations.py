@@ -43,7 +43,6 @@ class TestCommutators(unittest.TestCase):
 
     def test_conjugates(self):
         """com1 is real and com4 is imaginary."""
-        print re(com1(x))
         for scalar in (x, z):
             self.assertEqual((conjugate(com1(scalar))
                               - com1(conjugate(scalar))).expand(), 0)

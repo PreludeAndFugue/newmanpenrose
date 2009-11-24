@@ -133,20 +133,35 @@ b05 = D(psi3) - deltab(psi2) - D(p21) + delta(p20) - 2*deltab(L) + 2*l*psi1 \
       + (2*b + conjugate(p) - 2*conjugate(a))*p20 + 2*(conjugate(r) - e)*p21 \
       - conjugate(k)*p22
 
-b06 = 1
+b06 = Delta(psi2) - delta(psi3) + D(p22) - delta(p21) + 2*Delta(L) - 2*n*psi1 \
+      + 3*m*psi2 - 2*(b - t)*psi3 - s*psi4 + 2*m*p11 + conjugate(l)*p20 \
+      - 2*p*p12 - 2*(b + conjugate(p))*p21 - (conjugate(r) - 2*e - 2*conjugate(e))*p22
 
-b07 = 1
+b07 = D(psi4) - deltab(psi3) + Delta(p20) - deltab(p21) + 3*l*psi2 \
+      - 2*(a + 2*p)*psi3 - (r - 4*e)*psi4 - 2*n*p10 + 2*l*p11 \
+      + (2*g - 2*conjugate(g) + conjugate(m))*p20 + 2*(conjugate(t) - a)*p21 \
+      - conjugate(s)*p22
 
-b08 = 1
-
-b09 = 1
+b08 = Delta(psi3) - delta(psi4) - Delta(p21) + deltab(p22) - 3*n*psi2 \
+      + 2*(g + 2*m)*psi3 - (4*b - t)*psi4 + 2*n*p11 + conjugate(n)*p20 - 2*l*p12 \
+      - 2*(g + conjugate(m))*p21 + (conjugate(t) - 2*conjugate(b) - 2*a)*p22
 
 # contracted Bianchi identities
-b10 = 1
+b09 = D(p11) - delta(p10) + Delta(p00) - deltab(p01) + 3*D(L) \
+      - (2*g + 2*conjugate(g) - m - conjugate(m))*p00 \
+      - (p - 2*a - 2*conjugate(t))*p01 - (conjugate(p) - 2*conjugate(a) - 2*t)*p10 \
+      - 2*(r + conjugate(r))*p11 - conjugate(s)*p02 - s*p20 + conjugate(k)*p12 \
+      + k*p21
 
-b11 = 1
+b10 = D(p12) - delta(p11) + Delta(p01) - deltab(p02) + 3*delta(L) \
+      - (2*g - m - 2*conjugate(m))*p01 - conjugate(n)*p00 + conjugate(l)*p10 \
+      - 2*(conjugate(p) - t)*p11 - (p + 2*conjugate(b) - 2*a - conjugate(t))*p02 \
+      - (2*r + conjugate(r) - 2*conjugate(e))*p12 - s*p21 + k*p22
 
-b12 = 1
+b11 = D(p22) - delta(p21) + Delta(p11) - deltab(p12) + 3*Delta(L) - n*p01 \
+      - conjugate(n)*p10 + 2*(m + conjugate(m))*p11 + l*p02 + conjugate(l)*p20 \
+      - (2*p - conjugate(t) + 2*conjugate(b))*p12 - (2*b - t + 2*conjugate(p))*p21 \
+      - (r + conjugate(r) - 2*e - 2*conjugate(e))*p22
 
 # perhaps a dictionary...?
 bianchi_identities = (b01, b02, b03, b04, b05, b06, b07, b08, b09)
