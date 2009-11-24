@@ -1,8 +1,9 @@
 import unittest
-from sympy import conjugate, S, re, im
+from sympy import conjugate, S, re, im, I
 from newmanpenrose.equations import *
 
 x = Symbol('x', real = True)
+y = I*x
 z = Symbol('z')
 
 class TestScalars(unittest.TestCase):
@@ -37,7 +38,7 @@ class TestCommutators(unittest.TestCase):
     def test_constants(self):
         """Commutators when applied to a constant should return 0."""
         for commutator in comms:
-            for constant in (1, 0, -5, S.Zero, S.One):
+            for constant in (1, 0, -5, S.Zero, S.One, I):
                 self.assertEqual(commutator(constant), 0)
 
     def test_conjugates(self):

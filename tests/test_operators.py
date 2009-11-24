@@ -1,5 +1,5 @@
 import unittest
-from sympy import conjugate, S, diff
+from sympy import conjugate, S, diff, I
 from newmanpenrose.operators import D, Delta, delta, deltab
 from newmanpenrose.equations import *
 
@@ -16,7 +16,7 @@ class TestOperators(unittest.TestCase):
     def test_constants(self):
         """The derivative operators applied to constants should result in
         zero."""
-        constants = (0, 1, 5, -10, S.Zero)
+        constants = (0, 1, 5, -10, S.Zero, I)
         for op in operators:
             for const in constants:
                 self.assertEqual(op(const), 0)
@@ -47,7 +47,7 @@ class TestOperators(unittest.TestCase):
     def test_constant_multiple(self):
         for op in operators:
             for operand in (x, z):
-                for constant in (0, 1, -5, S.Zero, S.One):
+                for constant in (0, 1, -5, S.Zero, S.One, I):
                     self.assertEqual(op(constant*operand), constant*op(operand))
 
     def test_minus(self):

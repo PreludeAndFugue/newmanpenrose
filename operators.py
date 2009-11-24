@@ -11,7 +11,8 @@ class DerivativeOperator(Function):
 
     @classmethod
     def eval(cls, arg):
-        if arg.is_Number:
+        # TODO:  find out what the difference is between is_Number and is_number
+        if arg.is_Number or arg.is_number:
             return S.Zero
         if arg.is_negative:
             return -cls(-arg)
