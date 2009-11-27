@@ -54,16 +54,16 @@ weyl_scalars = (psi0, psi1, psi2, psi3, psi4)
 # spin coefficient equations
 e01 = D(r) - deltab(k) - (r*r + s*conjugate(s)) - (e + conjugate(e))*r \
       + conjugate(k)*t + k*(3*a + conjugate(b) - p) - p00
-      
+
 e02 = D(s) - delta(k) - (r + conjugate(r) + 3*e - conjugate(e))*s \
       + (t - conjugate(p) + conjugate(a) + 3*b)*k - psi0
-      
+
 e03 = D(t) - Delta(k) - (t + conjugate(p))*r - (conjugate(t) + p)*s \
       - (e - conjugate(e))*t + (3*g + conjugate(g))*k - psi1 - p01
-      
+
 e04 = D(a) - deltab(e) - (r + conjugate(e) - 2*e)*a - b*conjugate(s) \
       + conjugate(b)*e + k*l + conjugate(k)*g - (e + r)*p - p10
-      
+
 e05 = D(b) - delta(e) - (a + p)*s - (conjugate(r) - conjugate(e))*b + (m + g)*k \
       + (conjugate(a) - conjugate(p))*e - psi1
 

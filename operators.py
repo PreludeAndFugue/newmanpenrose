@@ -1,9 +1,10 @@
+import operator
 from sympy import Symbol, Function, conjugate, S, Mul, Add
 
 #D = Function('D')
 #Delta = Function ('Delta')
 #delta = Function('delta')
-#deltab = Function('deltab')    
+#deltab = Function('deltab')
 
 class DerivativeOperator(Function):
 
@@ -61,7 +62,36 @@ class deltab(DerivativeOperator):
         return delta(conjugate(self.args[0]))
 
 
-def main(): 
+# Create the commutators from a class
+class Commutator(object):
+    """The base commutator object.
+
+    op1 and op2 are the derivative operators on the left-hand-side of the
+    commutator.
+
+    rhs is a list of the four coefficients of the derivative operators on the
+    right-hand-side."""
+
+    operators = (D, Delta, delta, deltab)
+
+    def __init__(self, op1, op2, rhs):
+        self.op1 = op1
+        self.op2 = op2
+        self.rhs = rhs
+
+    def __call__(self, scalar):
+        """Return the result of applying the commutator to a scalar."""
+        rhs_parts = [coeff[i]*op[i](scalar) for coeff, op in zip(self.rhs, Commutator.operators)]
+        rhs = map(operator.add, rhs_parts)
+        return op1(op2(scalar)) - op2(op1(scalar)) - rhs
+        
+    def subs(self, substitutions):
+        """Simplify the commutator by providing relationships for replacing
+        sympy Symbols in the coefficients on the right-hand-side."""
+        self.rhs[:] = [coeff.subs(substitution) for coeff in self.rhs]
+
+
+def main():
     x = Symbol('x', real = True)
     y = Symbol('y')
     z = Symbol('z')
