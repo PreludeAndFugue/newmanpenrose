@@ -81,7 +81,7 @@ class Commutator(object):
 
     def __call__(self, scalar):
         """Return the result of applying the commutator to a scalar."""
-        rhs_parts = [coeff[i]*op[i](scalar) for coeff, op in zip(self.rhs, Commutator.operators)]
+        rhs_parts = [coeff*op(scalar) for coeff, op in zip(self.rhs, Commutator.operators)]
         rhs = map(operator.add, rhs_parts)
         return op1(op2(scalar)) - op2(op1(scalar)) - rhs
         
