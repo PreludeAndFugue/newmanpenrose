@@ -54,11 +54,11 @@ class TestOperators(unittest.TestCase):
         for op in operators:
             for operand in (x, z):
                 self.assertEqual(op(-operand), -op(operand))
-                
+
     def test_product_rule(self):
         for op in operators:
             self.assertEqual(op(x*z) - z*op(x) - x*op(z), 0)
-            
+
     def test_general(self):
         for op in operators:
             lhs = op(2*x*z)

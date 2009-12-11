@@ -1,5 +1,5 @@
 from sympy import Symbol, conjugate
-from operators import D, Delta, delta, deltab
+from operators import D, Delta, delta, deltab, Commutator
 
 # The NP scalars
 k = Symbol('kappa', real = False)
@@ -50,6 +50,34 @@ psi4 = Symbol('Psi4', real = False)
 
 # perhaps a dictionary...?
 weyl_scalars = (psi0, psi1, psi2, psi3, psi4)
+
+class Collection(object):
+    """An instance of Collection is used to store and access related equations.
+    It also provides methods to simplify the equations it stores."""
+    def __init__(self, equations):
+        """Create an Collection instance.
+
+        equations is a dictionary of equations where the keys are integers 1 to
+        n, and the values are the equations."""
+        self.equations = equations
+
+    def __getitem__(self, key):
+        """Get a particular equation using its key."""
+        return self.equations[key]
+
+    def __iter__(self):
+        for key in sorted(self.equations.keys()):
+            yield self.equations[key]
+
+    def __str__(self):
+        return str(self.equations)
+
+    def subs(self, substitutions):
+        """Substitute a Sympy substitution into the equations by calling the
+        Sympy subs method on the equations."""
+        for key in self.equations.iterkeys():
+            self.equations[key] = self.equations[key].subs(substitutions)
+
 
 # spin coefficient equations
 e01 = D(r) - deltab(k) - (r*r + s*conjugate(s)) - (e + conjugate(e))*r \
@@ -107,8 +135,10 @@ e18 = Delta(a) - deltab(g) - (r + e)*n + (t + b)*l - (conjugate(g) - conjugate(m
       - (conjugate(b) - conjugate(t))*g + psi3
 
 # perhaps a dictionary...?
-field_equations = (e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12,
+field_eqns = (e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12,
                    e13, e14, e15, e16, e17, e18)
+field_equations = Collection(dict((key, value) for key, value
+                             in enumerate(field_eqns)))
 
 # Bianchi identities
 b01 = D(psi1) - deltab(psi0) - D(p01) + delta(p00) - (p - 4*a)*psi0 \
@@ -164,44 +194,28 @@ b11 = D(p22) - delta(p21) + Delta(p11) - deltab(p12) + 3*Delta(L) - n*p01 \
       - (r + conjugate(r) - 2*e - 2*conjugate(e))*p22
 
 # perhaps a dictionary...?
-bianchi_identities = (b01, b02, b03, b04, b05, b06, b07, b08, b09)
+bianchi_ids = (b01, b02, b03, b04, b05, b06, b07, b08, b09)
+bianchi_identities = Collection(dict((key, value) for key, value
+                                in enumerate(bianchi_ids)))
 
 # commutator equations (operators)
-def com1(scalar):
-    """The Delta-D commutator."""
-    return Delta(D(scalar)) - D(Delta(scalar)) - (g + conjugate(g))*D(scalar) \
-           - (e + conjugate(e))*Delta(scalar) + (conjugate(t) + p)*delta(scalar) \
-           + (t + conjugate(p))*deltab(scalar)
+com1 = Commutator(Delta, D, [g + conjugate(g), e + conjugate(e),
+                             -(conjugate(t) + p), -(t + conjugate(p))])
+com2 = Commutator(delta, D, [conjugate(a) + b - conjugate(p), k,
+                             -(conjugate(r) + e - conjugate(e)), -s])
+com3 = Commutator(delta, Delta, [-conjugate(n), t - conjugate(a) - b,
+                                 m - g + conjugate(g), conjugate(l)])
+com4 = Commutator(deltab, delta, [conjugate(m) - m, conjugate(r) - r,
+                                  a - conjugate(b), -conjugate(a) + b])
 
-def com2(scalar):
-    """The delta-D commutator."""
-    return delta(D(scalar)) - D(delta(scalar)) - (conjugate(a) + b - conjugate(p))*D(scalar) \
-           - k*Delta(scalar) + (conjugate(r) + e - conjugate(e))*delta(scalar) \
-           + s*deltab(scalar)
-
-def com3(scalar):
-    """The delta-Delta commutator."""
-    return delta(Delta(scalar)) - Delta(delta(scalar)) + conjugate(n)*D(scalar) \
-           - (t - conjugate(a) - b)*Delta(scalar) - (m - g + conjugate(g))*delta(scalar) \
-           - conjugate(l)*deltab(scalar)
-
-def com4(scalar):
-    """The delta-deltab commutator."""
-    return deltab(delta(scalar)) - delta(deltab(scalar)) - (conjugate(m) - m)*D(scalar) \
-           - (conjugate(r) - r)*Delta(scalar) - (a - conjugate(b))*delta(scalar) \
-           + (conjugate(a) - b)*deltab(scalar)
+comms = (com1, com2, com3, com4)
 
 def commutators(scalar):
     """All the commutators applied to a scalar."""
     return com1(scalar), com2(scalar), com3(scalar), com4(scalar)
 
-comms = (com1, com2, com3, com4)
-
 def main():
-    print e01
-    print
-    print e02
-    print p00.is_real
+    pass
 
 if __name__ == '__main__':
     main()

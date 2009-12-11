@@ -1,3 +1,9 @@
+"""Create the four derivative operatiors D, Delta, delta, deltab as Sympy
+Functions.
+
+Define a class Commutator which is used to create the four derivate operators.
+"""
+
 import operator
 from sympy import Symbol, Function, conjugate, S, Mul, Add
 
@@ -81,35 +87,21 @@ class Commutator(object):
 
     def __call__(self, scalar):
         """Return the result of applying the commutator to a scalar."""
-        rhs_parts = [coeff*op(scalar) for coeff, op in zip(self.rhs, Commutator.operators)]
-        rhs = map(operator.add, rhs_parts)
-        return op1(op2(scalar)) - op2(op1(scalar)) - rhs
-        
+        rhs = sum(coeff*op(scalar) for coeff, op
+                  in zip(self.rhs, Commutator.operators))
+        return self.op1(self.op2(scalar)) - self.op2(self.op1(scalar)) - rhs
+
     def subs(self, substitutions):
         """Simplify the commutator by providing relationships for replacing
-        sympy Symbols in the coefficients on the right-hand-side."""
-        self.rhs[:] = [coeff.subs(substitution) for coeff in self.rhs]
+        NP scalars in the coefficients on the right-hand-side."""
+        self.rhs[:] = [coeff.subs(substitutions) for coeff in self.rhs]
+
+    def __str__(self):
+        return '%s, %s\n%s' % (self.op1, self.op2, self.rhs)
 
 
 def main():
-    x = Symbol('x', real = True)
-    y = Symbol('y')
-    z = Symbol('z')
-
-    print conjugate(D(x**2))
-    print 'D(5) =', D(5)
-    print 'D(-x) = ', D(-x)
-    print 'D(x + y) = ', D(x + y)
-    print D(x - y)
-    print D(x**2)
-    print D(x*y)
-    #print D(x*y*z)
-    print
-    print conjugate(delta(x))
-    print D(Delta(x**2))
-    print
-    print
-    print Delta.nargs
+    pass
 
 if __name__ == '__main__':
     main()
